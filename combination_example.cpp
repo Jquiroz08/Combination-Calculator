@@ -6,12 +6,13 @@ using namespace std;
  * *** STUDENTS SHOULD WRITE CODE FOR THIS FUNCTION ***
  */
 uint16_t factorial(const uint16_t x) { 
-
-
-
-
-    return x; }
-
+    if (x == 0 || x == 1)
+    { 
+        return 1;
+    } else{
+    
+    return x * factorial(x-1); }
+    }
 /*
  * *** STUDENTS SHOULD WRITE CODE FOR THIS FUNCTION ***
  */
