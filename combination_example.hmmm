@@ -1,6 +1,6 @@
 ################################################################################
 # Combinations C(n,k) solution
-# STUDENT NAME GOES HERE
+# Joseph Quiroz
 ################################################################################
 
 ################################################################################
@@ -8,65 +8,58 @@
 # STUDENTS MUST EXPLAIN ALL REGISTERS THEY USE AND FOR WHAT PURPOSE HERE
 ################################################################################
 # r0 <- 0
-# r1 <- n
-# r2 <- k
-# r3 <- n-k
-# r4 <- n!
-# r5 <- k!
-# r6 <- (n-k)!
+# r1 <- n , n! , C(n,k)
+# r2 <- k, k!, k!*(n-k)!
+# r3 <- n-k, (n-k)!
+# r4 <- used for factorial calculaion
+# r5 <- -1 for error return
 
 # HMMMM pre-defined registers
 # r13 Function return value
 # r14 Function return address
 # r15 Stack pointer
 
-# STUIDENTS NEED TO ADD THEIR OWN ASSEMBLY CODE HERE
-
-################################################################################
-# read n, print n, and stop
-################################################################################
-
 ################################################################################
 # Get user inputs and calculate n-k
 ################################################################################
-0 read r1
-1 read r2
-2 sub r3 r1 r2
+0 read r1 # Gets n
+1 read r2 # Gets k
+2 sub r3 r1 r2 # Gets n-k
 ################################################################################
 # Checks if inputs are valid
 ################################################################################
-3 jltzn r1 18
-4 jltzn r2 18
+3 jltzn r1 18 # Checks if n >= 0
+4 jltzn r2 18 # Checks if k >= 0
 ################################################################################
 # Calculate factorials for n, k, (n-k)
 ################################################################################
-5 copy r4 r1
-6 calln r14 21
-7 copy r1 r13
-8 copy r4 r2
-9 calln r14 21
-10 copy r2 r13
-11 copy r4 r3
-12 calln r14 21
-13 copy r3 r13
+5 copy r4 r1 # Sets r4 to n
+6 calln r14 21 # Calculate n!
+7 copy r1 r13 # Sets r1 to n!
+8 copy r4 r2 # Sets r4 to k
+9 calln r14 21 # Calculate k!
+10 copy r2 r13 # Sets r2 to k!
+11 copy r4 r3 # Sets r4 to n-k
+12 calln r14 21 # Calculate (n-k)!
+13 copy r3 r13 # Sets r3 to (n-k)!
 ################################################################################
 # Calculate combination
 ################################################################################
-14 mul r2 r2 r3 #denominator
-15 div r1 r1 r2
-16 write r1
-17 halt
-18 setn r5 -1
-19 write r5
-20 halt
+14 mul r2 r2 r3 # Get denominator of combination formula
+15 div r1 r1 r2 # Calculate C(n,k)
+16 write r1 # Print C(n,k)
+17 halt # Stops program
+18 setn r5 -1 # Sets r5 -1 for error return
+19 write r5 # Prints -1
+20 halt # Stops program
 ################################################################################
 # Factorial function
 ################################################################################
-21 setn r13 1
-22 jeqzn r4 26
-23 mul r13 r13 r4
-24 addn r4 -1
-25 jumpn 22
-26 jumpr r14
+21 setn r13 1 # Sets return value to 1 for sum
+22 jeqzn r4 26 # If count equals 0, returns
+23 mul r13 r13 r4 # Multiply sum by count
+24 addn r4 -1 # Subtracts 1 from count
+25 jumpn 22 # Continue loop
+26 jumpr r14 # Returns
 
 
