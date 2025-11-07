@@ -31,7 +31,7 @@ int main() {
         return 0;
     }
     // calculate C(n,k) = n! / (k! * (n-k)!)
-    uint16_t c_n_k = factorial(n);
+    uint16_t c_n_k = factorial(n)/((factorial(k)*factorial(n-k)));
 
     // write out results
     cout << "result = " << c_n_k << endl;
